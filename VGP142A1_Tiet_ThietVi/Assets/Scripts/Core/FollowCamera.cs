@@ -2,18 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FollowCamera : MonoBehaviour
+namespace RPG.Core
 {
-    [SerializeField] Transform target;
-
-    // Update is called once per frame
-    void LateUpdate()
+    public class FollowCamera : MonoBehaviour
     {
-        if (!target)
+        [SerializeField] Transform target;
+        [SerializeField] float rotation_speed;
+
+        void Start()
         {
-            target = GameObject.FindWithTag("Player").GetComponent<Transform>();
+            if (!target)
+            {
+                target = GameObject.FindWithTag("Player").GetComponent<Transform>();
+            }
+
+            if (rotation_speed == 0)
+            {
+                rotation_speed = 2.0f;
+            }
         }
 
-        transform.position = target.position;
+        void LateUpdate()
+        {
+            if (Input.GetMouseButton(2))
+            {
+                RotateAroundYAxis();
+            }
+
+            FollowTarget();
+        }
+
+        void RotateAroundYAxis()
+        {
+            transform.Rotate(0, Input.GetAxis("Mouse X") * rotation_speed, 0, Space.World);
+        }
+
+        void FollowTarget()
+        {
+            transform.position = target.position;
+        }
     }
 }

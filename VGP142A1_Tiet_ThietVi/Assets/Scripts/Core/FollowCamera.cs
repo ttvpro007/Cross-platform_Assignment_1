@@ -24,7 +24,7 @@ namespace RPG.Core
 
         void LateUpdate()
         {
-            if (Input.GetMouseButton(2))
+            if (Input.GetMouseButton(1))
             {
                 RotateAroundYAxis();
             }

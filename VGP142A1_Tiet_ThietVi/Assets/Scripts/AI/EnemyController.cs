@@ -9,9 +9,9 @@ public class EnemyController : MonoBehaviour
     public float attackDistance;
     bool isWaiting = false;
 
-    Transform target;
-    NavMeshAgent agent;
-    FieldOfView fow;
+    public Transform target;
+    public NavMeshAgent agent;
+    public FieldOfView fow;
 
     void Start()
     {
@@ -20,18 +20,7 @@ public class EnemyController : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
     }
 
-    void Update()
-    {
-        if (TargetFound())
-        {
-            agent.SetDestination(target.position);
-            if (Vector3.Distance(transform.position, target.position) <= attackDistance)
-                FaceTarget();
-            StartCoroutine(Attack(2.0f));
-        }
-    }
-
-    bool TargetFound()
+    public bool TargetFound()
     {
         if (fow.visibleTargets.Count > 0)
         {
@@ -42,9 +31,20 @@ public class EnemyController : MonoBehaviour
             return false;
     }
 
-    IEnumerator Attack(float interval)
+    public void MoveTo(Transform _target)
     {
-        while (Vector3.Distance(transform.position, target.position) <= attackDistance && !isWaiting)
+        agent.isStopped = false;
+        agent.destination = _target.position;
+    }
+
+    public void StopMoving()
+    {
+        agent.isStopped = true;
+    }
+
+    public IEnumerator Attack(float interval)
+    {
+        if (Vector3.Distance(transform.position, target.position) <= attackDistance && !isWaiting)
         {
             DealDamage(target, 1.0f);
             isWaiting = true;
@@ -53,7 +53,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    void FaceTarget()
+    public void FaceTarget()
     {
         float smooth = 5.0f;
         Vector3 direction = (target.position - transform.position).normalized;
@@ -64,6 +64,16 @@ public class EnemyController : MonoBehaviour
     void DealDamage(Transform _target, float amount)
     {
         _target.GetComponent<HealthManager>().health -= amount;
+    }
+
+    public void TurnInvisible()
+    {
+        GetComponent<Renderer>().enabled = false;
+    }
+
+    public void TurnVisible()
+    {
+        GetComponent<Renderer>().enabled = true;
     }
 
     void OnDrawGizmosSelected()

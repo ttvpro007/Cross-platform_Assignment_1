@@ -42,4 +42,12 @@ public class PeekABoo : MonoBehaviour
             }
         }
     }
+
+    void OnTriggerEnter(Collider c)
+    {
+        if (c.gameObject.tag == "Projectile")
+        {
+            Destroy(gameObject);
+        }
+    }
 }

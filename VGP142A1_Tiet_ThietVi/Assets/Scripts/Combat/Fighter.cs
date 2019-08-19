@@ -9,49 +9,85 @@ namespace RPG.Combat
     public class Fighter : MonoBehaviour, IAction
     {
         [SerializeField] float weaponRange = 2.0f;
+        [SerializeField] float weaponDamage = 5.0f;
+        [SerializeField] float timeBetweenAttacks = 1.5f;
 
-        Transform target;
+        Health target;
+        float timeSinceLastAttack = Mathf.Infinity;
 
         private void Update()
         {
+            timeSinceLastAttack += Time.deltaTime;
+
             if (!target) return;
+
+            if (target.IsDead) return;
 
             if (!GetIsInRange())
             {
-                    GetComponent<Mover>().MoveTo(target.position);
+                GetComponent<Mover>().MoveTo(target.transform.position, 1.0f);
             }
             else
             {
                 GetComponent<Mover>().Cancel();
+                AttackBehaviour();
             }
+        }
+
+        public bool CanAttack(GameObject combatTarget)
+        {
+            if (combatTarget == null) return false;
+            Health targetHealth = combatTarget.GetComponent<Health>();
+            return targetHealth != null && !targetHealth.IsDead;
+        }
+
+        private void AttackBehaviour()
+        {
+            transform.LookAt(target.transform);
+
+            if (timeSinceLastAttack >= timeBetweenAttacks)
+            {
+                // Trigger animation Hit() event
+                TriggerAttackAnimation();
+                timeSinceLastAttack = 0;
+            }
+        }
+
+        private void TriggerAttackAnimation()
+        {
+            GetComponent<Animator>().ResetTrigger("cancelAttack");
+            GetComponent<Animator>().SetTrigger("attack");
         }
 
         private bool GetIsInRange()
         {
-            return Vector3.Distance(transform.position, target.position) < weaponRange;
+            return Vector3.Distance(transform.position, target.transform.position) < weaponRange;
         }
 
-        public void Attack(CombatTarget combat_target)
+        public void Attack(GameObject combatTarget)
         {
             GetComponent<ActionScheduler>().StartAction(this);
-            target = combat_target.transform;
-            switch (Mathf.FloorToInt(Random.Range(0.1f, 2.9f)))
-            {
-                case 0:
-                    print("Take that!!! " + combat_target.name + "!!!");
-                    return;
-                case 1:
-                    print("Heyyya!!! " + combat_target.name + "!!!");
-                    return;
-                case 2:
-                    print("Haaaaa!!! " + combat_target.name + "!!!");
-                    return;
-            }
+            target = combatTarget.GetComponent<Health>();
         }
 
         public void Cancel()
         {
+            StopAttackAnimation();
             target = null;
+            GetComponent<Mover>().Cancel();
+        }
+
+        private void StopAttackAnimation()
+        {
+            GetComponent<Animator>().ResetTrigger("cancelAttack");
+            GetComponent<Animator>().SetTrigger("cancelAttack");
+        }
+
+        // Animation Event
+        void Hit()
+        {
+            if (target == null) return;
+            target.TakeDamage(weaponDamage);
         }
     }
 }

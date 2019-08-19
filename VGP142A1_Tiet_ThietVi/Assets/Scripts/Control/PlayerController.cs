@@ -1,16 +1,31 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using RPG.Movement;
 using RPG.Combat;
-using System;
+using RPG.Core;
 
 namespace RPG.Control
 {
     public class PlayerController : MonoBehaviour
     {
+        [Range(0, 2)]
+        [SerializeField] public float moveSpeedFraction = 1.415f;
+
+        Health health;
+
+        // Cross-platform edit
+        public Transform targetTransform;
+
+        private void Start()
+        {
+            health = GetComponent<Health>();
+        }
+
         void Update()
         {
+            if (health.IsDead) return;
             if (InteractWithCombat()) return;
             if (InteractWithMovement()) return;
         }
@@ -21,11 +36,16 @@ namespace RPG.Control
             foreach (RaycastHit hit in hits)
             {
                 CombatTarget target = hit.transform.GetComponent<CombatTarget>();
-                if (!target) continue;
+                if (target == null) continue;
 
-                if (Input.GetMouseButtonDown(0))
+                // Cross-platform edit
+                targetTransform = target.transform;
+
+                if (!GetComponent<Fighter>().CanAttack(target.gameObject)) continue;
+
+                if (Input.GetMouseButtonDown(0) || Input.GetMouseButton(0))
                 {
-                    GetComponent<Fighter>().Attack(target);
+                    GetComponent<Fighter>().Attack(target.gameObject);
                 }
                 return true;
             }
@@ -40,7 +60,7 @@ namespace RPG.Control
             {
                 if (Input.GetMouseButtonDown(0) || Input.GetMouseButton(0))
                 {
-                    GetComponent<Mover>().StartMoveAction(hit.point);
+                    GetComponent<Mover>().StartMoveAction(hit.point, moveSpeedFraction);
                 }
                 return true;
             }

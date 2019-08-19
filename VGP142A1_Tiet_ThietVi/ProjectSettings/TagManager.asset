@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Projectile
+  - UICanvas
+  - Objective
+  - Power Up
+  - Collectible
   layers:
   - Default
   - TransparentFX
@@ -15,9 +20,9 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
-  - 
-  - 
+  - Obstacle
+  - Target
+  - Player
   - 
   - 
   - 

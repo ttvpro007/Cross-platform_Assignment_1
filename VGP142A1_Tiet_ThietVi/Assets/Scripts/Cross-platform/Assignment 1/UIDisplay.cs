@@ -11,10 +11,13 @@ public class UIDisplay : MonoBehaviour
     [SerializeField] Text enemyHPText;
     [SerializeField] Text enemyNameText;
     [SerializeField] Text youWonText;
+    [SerializeField] Text godModeText;
+    [SerializeField] Text speedModeText;
 
     Transform target;
     PlayerController controller;
     Objective objective;
+    PowerUpController powerUpController;
 
     private void Start()
     {
@@ -22,6 +25,8 @@ public class UIDisplay : MonoBehaviour
 
         if (FindObjectOfType<Objective>() != null)
             objective = GameObject.FindGameObjectWithTag("Objective").GetComponent<Objective>();
+
+        powerUpController = GameObject.FindGameObjectWithTag("Player").GetComponent<PowerUpController>();
     }
 
     private void Update()
@@ -40,5 +45,23 @@ public class UIDisplay : MonoBehaviour
         
         if (objective && objective.completed)
             youWonText.enabled = true;
+
+        if (powerUpController.godMode)
+        {
+            godModeText.text = "God Mode: ON";
+        }
+        else
+        {
+            godModeText.text = "God Mode: OFF";
+        }
+
+        if (powerUpController.speedMode)
+        {
+            speedModeText.text = "Speed Mode: ON";
+        }
+        else
+        {
+            speedModeText.text = "Speed Mode: OFF";
+        }
     }
 }

@@ -8,6 +8,8 @@ TagManager:
   - Projectile
   - UICanvas
   - Objective
+  - Power Up
+  - Collectible
   layers:
   - Default
   - TransparentFX

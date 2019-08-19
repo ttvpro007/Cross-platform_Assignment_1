@@ -10,6 +10,7 @@ TagManager:
   - Objective
   - Power Up
   - Collectible
+  - Waypoints Pool
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - Obstacle
   - Target
   - Player
-  - 
+  - Terrain
   - 
   - 
   - 

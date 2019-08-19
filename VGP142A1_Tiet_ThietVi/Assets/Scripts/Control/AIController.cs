@@ -14,9 +14,11 @@ namespace RPG.Control
         [SerializeField] float chaseDistance = 5.0f;
         [SerializeField] float suspicionTime = 5.0f;
         float timeSinceLastSawPlayer = Mathf.Infinity;
-        [SerializeField] float waypointDwellTime = 5.0f;
+        [SerializeField] float waypointDwellTime = 0.0f;
         float timeSinceArrivedAtWaypoint = Mathf.Infinity;
+        [SerializeField] bool randomPatrol;
         [SerializeField] PatrolPath patrolPath;
+        [SerializeField] PatrolPathGraph patrolPathGraph;
         [SerializeField] float waypointTolerance = 1.0f;
         [Range(0, 1)]
         [SerializeField] float patrolSpeedFraction = 0.5f;
@@ -54,7 +56,7 @@ namespace RPG.Control
             }
             else
             {
-                PatrolBehaviour();
+                PatrolBehaviour(randomPatrol);
             }
 
             UpdateTimers();
@@ -87,24 +89,45 @@ namespace RPG.Control
         #endregion SUSPICION
 
         #region PATROL
-        private void PatrolBehaviour()
+        private void PatrolBehaviour(bool random)
         {
             Vector3 nextPosition = guardPosition;
 
-            if (patrolPath != null)
+            if (!random)
             {
-                if (AtWaypoint())
+                if (patrolPath != null)
                 {
-                    timeSinceArrivedAtWaypoint = 0;
-                    CycleWaypoint();
+                    if (AtWaypoint())
+                    {
+                        timeSinceArrivedAtWaypoint = 0;
+                        CycleWaypoint();
+                    }
+
+                    nextPosition = GetCurrentWaypoint();
                 }
 
-                nextPosition = GetCurrentWaypoint();
+                if (timeSinceArrivedAtWaypoint >= waypointDwellTime)
+                {
+                    mover.StartMoveAction(nextPosition, patrolSpeedFraction);
+                }
             }
-
-            if (timeSinceArrivedAtWaypoint >= waypointDwellTime)
+            else
             {
-                mover.StartMoveAction(nextPosition, patrolSpeedFraction);
+                if (patrolPathGraph != null)
+                {
+                    if (AtWaypointRandom())
+                    {
+                        timeSinceArrivedAtWaypoint = 0;
+                        CycleWaypointRandom();
+                    }
+
+                    nextPosition = GetCurrentWaypointRandom();
+                }
+
+                if (timeSinceArrivedAtWaypoint >= waypointDwellTime)
+                {
+                    mover.StartMoveAction(nextPosition, patrolSpeedFraction);
+                }
             }
         }
 
@@ -122,6 +145,22 @@ namespace RPG.Control
         {
             return patrolPath.GetWaypoint(currentWaypointIndex);
         }
+
+        private bool AtWaypointRandom()
+        {
+            return Vector3.Distance(transform.position, GetCurrentWaypointRandom()) <= waypointTolerance;
+        }
+
+        private void CycleWaypointRandom()
+        {
+            currentWaypointIndex = patrolPathGraph.GetNextWaypointIndex(currentWaypointIndex);
+        }
+
+        private Vector3 GetCurrentWaypointRandom()
+        {
+            return patrolPathGraph.GetWaypoint(currentWaypointIndex);
+        }
+
         #endregion PATROL
 
         #region GIZMOS

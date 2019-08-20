@@ -7,22 +7,35 @@ public class PatrolPathGraph : MonoBehaviour
     [SerializeField] List<GameObject> waypoints = new List<GameObject>();
     Graph<GameObject> graph = new Graph<GameObject>();
 
-    private void Start()
+    private void Awake()
     {
+        List<GameObject> temp = new List<GameObject>();
+
         for (int i = 0; i < transform.childCount; i++)
         {
-            int j = Random.Range(0, transform.GetChild(i).childCount);
+            temp.Add(transform.GetChild(i).gameObject);
+        }
 
-            graph.AddNode(transform.GetChild(i).transform.GetChild(j).gameObject);
+        for (int i = 0; i < temp.Count;)
+        {
+            int j = Random.Range(0, temp.Count);
 
-            waypoints.Add(transform.GetChild(i).transform.GetChild(j).gameObject);
+            graph.AddNode(temp[j]);
+
+            waypoints.Add(temp[j]);
+
+            temp.Remove(temp[j]);
         }
 
         for (int i = 0; i < graph.size; i++)
         {
             int j = GetNextIndex(transform.childCount, i);
-            graph.AddEdge(waypoints[i], waypoints[j]);
-        } 
+            float distance = Vector3.Distance(waypoints[i].transform.position, waypoints[j].transform.position);
+            graph.AddEdge(waypoints[i], waypoints[j], distance);
+        }
+
+        if (graph.FindNode(waypoints[0]).edges[0] != null)
+            Debug.Log(graph.FindNode(waypoints[0]).edges[0].ToString());
     }
     
     private void OnDrawGizmos()

@@ -34,7 +34,7 @@ public class ShowOnlyDrawer : PropertyDrawer
                 text = property.boolValue.ToString();
                 break;
             case SerializedPropertyType.Float:
-                text = property.floatValue.ToString("0.00000");
+                text = property.floatValue.ToString("0.000");
                 break;
             case SerializedPropertyType.String:
                 text = property.stringValue;

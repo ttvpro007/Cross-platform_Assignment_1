@@ -4,22 +4,25 @@ using UnityEngine;
 
 public class Graph<Data>
 {
-    List<Node> nodes = new List<Node>();
-    List<WeightedEdge> edges = new List<WeightedEdge>();
+    List<Node<Data>> m_nodes = new List<Node<Data>>();
+    List<WeightedEdge<Data>> m_edges = new List<WeightedEdge<Data>>();
 
-    public int size
-    {
-        get { return nodes.Count; }
-    }
+    public List<Node<Data>> nodes { get { return m_nodes; } }
 
-    public Node AddNode(Data data)
+    public List<WeightedEdge<Data>> edges { get { return m_edges; } }
+
+    public int nodeCount { get { return m_nodes.Count; } }
+
+    public int edgeCount { get { return m_edges.Count; } }
+
+    public Node<Data> AddNode(Data data)
     {
-        Node node = new Node(data);
-        nodes.Add(node);
+        Node<Data> node = new Node<Data>(data);
+        m_nodes.Add(node);
         return node;
     }
 
-    public Node FindNode(Data data)
+    public Node<Data> FindNode(Data data)
     {
         for (int i = 0; i < nodes.Count; i++)
         {
@@ -32,7 +35,7 @@ public class Graph<Data>
         return null;
     }
 
-    public void AddEdge(Node node1, Node node2)
+    public void AddEdge(Node<Data> node1, Node<Data> node2)
     {
         if (node1 == null || node2 == null)
         {
@@ -43,9 +46,9 @@ public class Graph<Data>
         node2.neighbors.Add(node1);
     }
 
-    public void AddEdge(Node home, Node neighbor, float weight)
+    public void AddEdge(Node<Data> home, Node<Data> neighbor, float weight)
     {
-        WeightedEdge edge = new WeightedEdge();
+        WeightedEdge<Data> edge = new WeightedEdge<Data>();
 
         if (home == null || neighbor == null)
         {
@@ -58,19 +61,22 @@ public class Graph<Data>
         home.AddEdge(edge);
         neighbor.AddEdge(edge);
         edge.RegisterProperties(home, neighbor, weight);
-        edges.Add(edge);
+        m_edges.Add(edge);
     }
 
     public void AddEdge(Data data1, Data data2)
     {
+        WeightedEdge<Data> edge = new WeightedEdge<Data>();
         AddEdge(FindNode(data1), FindNode(data2));
+        edge.RegisterProperties(FindNode(data1), FindNode(data2), 0.0f);
+        m_edges.Add(edge);
     }
 
     public void AddEdge(Data homeData, Data neighborData, float weight)
     {
-        Node home = FindNode(homeData);
-        Node neighbor = FindNode(neighborData);
-        WeightedEdge edge = new WeightedEdge();
+        Node<Data> home = FindNode(homeData);
+        Node<Data> neighbor = FindNode(neighborData);
+        WeightedEdge<Data> edge = new WeightedEdge<Data>();
 
         AddEdge(home, neighbor);
         home.AddEdge(edge);
@@ -79,48 +85,58 @@ public class Graph<Data>
         edges.Add(edge);
     }
 
-    public class Node
+    public float GetWeight(Data homeData, Data neighborData)
     {
-        Data m_data;
-        List<Node> m_neighbors = new List<Node>();
-        List<WeightedEdge> m_edges = new List<WeightedEdge>();
-
-        public Node(Data data) { m_data = data; }
-        public Data data { get { return m_data; } }
-        public List<Node> neighbors { get { return m_neighbors; } }
-        public List<WeightedEdge> edges { get { return m_edges; } }
-
-        public void AddEdge(WeightedEdge edge)
+        if (homeData != null && neighborData != null)
         {
-            m_edges.Add(edge);
+            Node<Data> home = FindNode(homeData);
+            Node<Data> neighbor = FindNode(neighborData);
+
+            foreach (WeightedEdge<Data> edge in home.edges)
+            {
+                if (edge.neighbor == neighbor)
+                {
+                    return (edge.weight != 0.0f) ? edge.weight : 0.0f;
+                }
+            }
+        }
+        else
+        {
+            Debug.Log("Home data " + homeData.ToString() + " or Neighbor data " + neighborData.ToString() + " is null.");
+            return 0.0f;
         }
 
-        public override string ToString()
-        {
-            return string.Format("{0}", m_data.ToString());
-        }
+        Debug.Log("No weight registered between " + homeData.ToString() + " and " + neighborData.ToString());
+        return 0.0f;
     }
 
-    public class WeightedEdge
+    public float GetWeight(Node<Data> home, Node<Data> neighbor)
     {
-        Node m_home;
-        Node m_neighbor;
-        float m_weight;
-
-        public float weight { get { return m_weight; } }
-        public Node home { get { return m_home; } }
-        public Node neighbor { get { return m_neighbor; } }
-
-        public void RegisterProperties(Node home, Node neighbor, float weight)
+        if (home != null && neighbor != null)
         {
-            m_home = home;
-            m_neighbor = neighbor;
-            m_weight = weight;
+            foreach (WeightedEdge<Data> edge in home.edges)
+            {
+                if (edge.neighbor == neighbor)
+                {
+                    return (edge.weight != 0.0f) ? edge.weight : 0.0f;
+                }
+            }
+        }
+        else
+        {
+            Debug.Log("Home data " + home.ToString() + " or Neighbor data " + neighbor.ToString() + " is null.");
+            return 0.0f;
         }
 
-        public override string ToString()
+        Debug.Log("No weight registered between " + home.ToString() + " and " + neighbor.ToString());
+        return 0.0f;
+    }
+
+    public void ResetNodesVisited()
+    {
+        for (int i = 0; i < nodes.Count; i++)
         {
-            return string.Format("Home: {0} - Distance: {1} meters - Neighbor: {2}", m_home.ToString(), weight.ToString("0.000"), m_neighbor.ToString());
+            nodes[i].visited = false;
         }
     }
 }

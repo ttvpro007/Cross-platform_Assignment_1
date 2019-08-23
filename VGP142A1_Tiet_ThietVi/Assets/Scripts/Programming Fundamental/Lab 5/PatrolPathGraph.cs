@@ -5,7 +5,7 @@ using UnityEngine;
 public class PatrolPathGraph : MonoBehaviour
 {
     [SerializeField] List<GameObject> waypoints = new List<GameObject>();
-    Graph<GameObject> graph = new Graph<GameObject>();
+    public Graph<GameObject> graph = new Graph<GameObject>();
 
     private void Awake()
     {
@@ -27,22 +27,21 @@ public class PatrolPathGraph : MonoBehaviour
             temp.Remove(temp[j]);
         }
 
-        for (int i = 0; i < graph.size; i++)
+        for (int i = 0; i < graph.nodeCount; i++)
         {
             int j = GetNextIndex(transform.childCount, i);
             float distance = Vector3.Distance(waypoints[i].transform.position, waypoints[j].transform.position);
             graph.AddEdge(waypoints[i], waypoints[j], distance);
         }
 
-        if (graph.FindNode(waypoints[0]).edges[0] != null)
-            Debug.Log(graph.FindNode(waypoints[0]).edges[0].ToString());
+        Debug.Log(1);
     }
-    
+
     private void OnDrawGizmos()
     {
-        for (int i = 0; i < graph.size; i++)
+        for (int i = 0; i < graph.nodeCount; i++)
         {
-            int j = GetNextIndex(graph.size, i);
+            int j = GetNextIndex(graph.nodeCount, i);
             Gizmos.DrawLine(GetWaypoint(i), GetWaypoint(j));
         }
     }
@@ -54,7 +53,7 @@ public class PatrolPathGraph : MonoBehaviour
 
     public int GetNextWaypointIndex(int currentIndex)
     {
-        return (currentIndex == graph.size - 1) ? 0 : currentIndex + 1;
+        return (currentIndex == graph.nodeCount - 1) ? 0 : currentIndex + 1;
     }
 
     public Vector3 GetWaypoint(int i)

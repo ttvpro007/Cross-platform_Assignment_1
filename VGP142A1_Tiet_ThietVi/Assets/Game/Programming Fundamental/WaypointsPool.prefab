@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9211870242952252615}
   - component: {fileID: 4402317866115102204}
+  - component: {fileID: 702632664}
   m_Layer: 0
   m_Name: Waypoint (1)
   m_TagString: Untagged
@@ -43,6 +44,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af4b75423e1eff0498eb4c3dab98b966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &702632664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 92910218594386065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6908ec08f5fcb1f4487a0135a3797aaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPositions: []
+  weights: []
 --- !u!1 &367642913333858344
 GameObject:
   m_ObjectHideFlags: 0
@@ -53,6 +68,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4071688111867781679}
   - component: {fileID: 921839377229409446}
+  - component: {fileID: 974503807}
   m_Layer: 0
   m_Name: Waypoint (5)
   m_TagString: Untagged
@@ -86,6 +102,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af4b75423e1eff0498eb4c3dab98b966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &974503807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367642913333858344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6908ec08f5fcb1f4487a0135a3797aaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPositions: []
+  weights: []
 --- !u!1 &494984109517917362
 GameObject:
   m_ObjectHideFlags: 0
@@ -96,6 +126,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6131046944368017264}
   - component: {fileID: 2750513533159613399}
+  - component: {fileID: 794365086}
   m_Layer: 0
   m_Name: Waypoint (9)
   m_TagString: Untagged
@@ -129,6 +160,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af4b75423e1eff0498eb4c3dab98b966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &794365086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 494984109517917362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6908ec08f5fcb1f4487a0135a3797aaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPositions: []
+  weights: []
 --- !u!1 &1165863161078125480
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,6 +184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5207559656590012811}
   - component: {fileID: 5382666223075496772}
+  - component: {fileID: 1938870763}
   m_Layer: 0
   m_Name: Waypoint (2)
   m_TagString: Untagged
@@ -172,6 +218,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af4b75423e1eff0498eb4c3dab98b966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1938870763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1165863161078125480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6908ec08f5fcb1f4487a0135a3797aaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPositions: []
+  weights: []
 --- !u!1 &1542861491398282040
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,6 +242,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7627091484482663170}
   - component: {fileID: 6199981072194184541}
+  - component: {fileID: 1111376553}
   m_Layer: 0
   m_Name: Waypoint
   m_TagString: Untagged
@@ -215,6 +276,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af4b75423e1eff0498eb4c3dab98b966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1111376553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1542861491398282040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6908ec08f5fcb1f4487a0135a3797aaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPositions: []
+  weights: []
 --- !u!1 &2737280740028400841
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,6 +300,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6709007778409080147}
   - component: {fileID: 1218864773905549013}
+  - component: {fileID: 1281891424}
   m_Layer: 0
   m_Name: Waypoint (3)
   m_TagString: Untagged
@@ -258,6 +334,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af4b75423e1eff0498eb4c3dab98b966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1281891424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2737280740028400841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6908ec08f5fcb1f4487a0135a3797aaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPositions: []
+  weights: []
 --- !u!1 &4565164032673688414
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,6 +358,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5203931312626342536}
   - component: {fileID: 7373585715944806379}
+  - component: {fileID: 179642018}
   m_Layer: 0
   m_Name: Waypoint (6)
   m_TagString: Untagged
@@ -301,6 +392,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af4b75423e1eff0498eb4c3dab98b966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &179642018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4565164032673688414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6908ec08f5fcb1f4487a0135a3797aaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPositions: []
+  weights: []
 --- !u!1 &5757785451802915954
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,6 +416,7 @@ GameObject:
   m_Component:
   - component: {fileID: 352771949313897664}
   - component: {fileID: 8403552037129628808}
+  - component: {fileID: 1735586884}
   m_Layer: 0
   m_Name: Waypoint (7)
   m_TagString: Untagged
@@ -326,7 +432,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5757785451802915954}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.15, y: 1, z: 13.35}
+  m_LocalPosition: {x: 0.12, y: 1.48, z: 23.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5185427577858055941}
@@ -344,6 +450,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af4b75423e1eff0498eb4c3dab98b966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1735586884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5757785451802915954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6908ec08f5fcb1f4487a0135a3797aaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPositions: []
+  weights: []
 --- !u!1 &5838891049323778679
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,6 +474,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9202587907061309436}
   - component: {fileID: 4655506452170238333}
+  - component: {fileID: 1024881294}
   m_Layer: 0
   m_Name: Waypoint (4)
   m_TagString: Untagged
@@ -387,6 +508,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af4b75423e1eff0498eb4c3dab98b966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1024881294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5838891049323778679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6908ec08f5fcb1f4487a0135a3797aaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPositions: []
+  weights: []
 --- !u!1 &6213328445374745874
 GameObject:
   m_ObjectHideFlags: 0
@@ -396,6 +531,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5185427577858055941}
+  - component: {fileID: 6708866214343693709}
   m_Layer: 0
   m_Name: WaypointsPool
   m_TagString: Waypoints Pool
@@ -427,6 +563,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6708866214343693709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6213328445374745874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6308b60a29576c34eaf3329fadfca68a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypoints: []
 --- !u!1 &7364860039831003293
 GameObject:
   m_ObjectHideFlags: 0
@@ -437,6 +586,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8167385956632165262}
   - component: {fileID: 1081262993362567107}
+  - component: {fileID: 235749544}
   m_Layer: 0
   m_Name: Waypoint (8)
   m_TagString: Untagged
@@ -452,7 +602,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7364860039831003293}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.4, y: 1, z: 12.44}
+  m_LocalPosition: {x: -7.44, y: 1.71, z: 22.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5185427577858055941}
@@ -470,3 +620,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af4b75423e1eff0498eb4c3dab98b966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &235749544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7364860039831003293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6908ec08f5fcb1f4487a0135a3797aaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPositions: []
+  weights: []

@@ -92,7 +92,6 @@ GameObject:
   - component: {fileID: 7674713753035289599}
   - component: {fileID: 2863365193300431141}
   - component: {fileID: 46022727731573226}
-  - component: {fileID: 479501684213687316}
   - component: {fileID: 5720158760627323712}
   - component: {fileID: 3106296965838077834}
   m_Layer: 11
@@ -236,31 +235,6 @@ MonoBehaviour:
   weaponRange: 2
   weaponDamage: 5
   timeBetweenAttacks: 1
---- !u!114 &479501684213687316
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8184422424005489368}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 291e44a91ec8c1846bc5bc8a2fb7be51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  viewRadius: 15
-  viewAngle: 120
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 1024
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 512
-  visibleTargets: []
-  meshResolution: 2
-  edgeResolveIterations: 6
-  edgeDistanceThreshold: 0.5
-  viewMeshFilter: {fileID: 1944103142}
 --- !u!114 &5720158760627323712
 MonoBehaviour:
   m_ObjectHideFlags: 0

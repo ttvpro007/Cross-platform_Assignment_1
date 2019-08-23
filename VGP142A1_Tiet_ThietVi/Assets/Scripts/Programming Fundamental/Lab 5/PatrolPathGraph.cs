@@ -33,8 +33,6 @@ public class PatrolPathGraph : MonoBehaviour
             float distance = Vector3.Distance(waypoints[i].transform.position, waypoints[j].transform.position);
             graph.AddEdge(waypoints[i], waypoints[j], distance);
         }
-
-        Debug.Log(1);
     }
 
     private void OnDrawGizmos()

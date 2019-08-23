@@ -28,24 +28,27 @@ public class WeightHandle : MonoBehaviour
         y = transform.position.y;
         z = transform.position.z;
 
-        edgeCount = self.edges.Count;
-
-        for (int i = 0; i < edgeCount; i++)
+        if (self != null)
         {
-            currentEdge = self.edges[i];
+            edgeCount = self.edges.Count;
 
-            if (self.data == currentEdge.home.data && !currentEdge.neighbor.visited)
+            for (int i = 0; i < edgeCount; i++)
             {
-                neighborPosition = currentEdge.neighbor.data.transform.position;
+                currentEdge = self.edges[i];
 
-                textPosition.x = (x + neighborPosition.x) / 2;
-                textPosition.y = (y + neighborPosition.y) / 2;
-                textPosition.z = (z + neighborPosition.z) / 2;
+                if (self.data == currentEdge.home.data && !currentEdge.neighbor.visited)
+                {
+                    neighborPosition = currentEdge.neighbor.data.transform.position;
 
-                textPositions.Add(textPosition);
-                weights.Add(currentEdge.weight);
+                    textPosition.x = (x + neighborPosition.x) / 2;
+                    textPosition.y = (y + neighborPosition.y) / 2;
+                    textPosition.z = (z + neighborPosition.z) / 2;
 
-                currentEdge.neighbor.visited = true;
+                    textPositions.Add(textPosition);
+                    weights.Add(currentEdge.weight);
+
+                    currentEdge.neighbor.visited = true;
+                }
             }
         }
     }

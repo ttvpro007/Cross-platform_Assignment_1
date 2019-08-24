@@ -20,6 +20,5 @@ public class WeightLabelHandle : Editor
         {
             Handles.Label(weightHandle.textPositions[i], weightHandle.weights[i].ToString("0.00") + " meter(s)");
         }
-
     }
 }

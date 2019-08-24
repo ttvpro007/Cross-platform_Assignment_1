@@ -15,6 +15,25 @@ namespace RPG.Movement
         NavMeshAgent navMeshAgent;
         Health health;
 
+        public bool isMoving
+        {
+            get
+            {
+                return speed > 0;
+            }
+        }
+
+        public float speed
+        {
+            get
+            {
+                Vector3 velocity = navMeshAgent.velocity;
+                Vector3 localVelocity = transform.InverseTransformDirection(velocity);
+                float m_speed = localVelocity.z;
+                return m_speed;
+            }
+        }
+
         void Start()
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
@@ -48,9 +67,6 @@ namespace RPG.Movement
 
         void UpdateAnimator()
         {
-            Vector3 velocity = navMeshAgent.velocity;
-            Vector3 localVelocity = transform.InverseTransformDirection(velocity);
-            float speed = localVelocity.z;
             GetComponent<Animator>().SetFloat("forwardSpeed", speed);
         }
 

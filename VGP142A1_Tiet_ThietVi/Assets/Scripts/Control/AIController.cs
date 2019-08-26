@@ -28,6 +28,8 @@ namespace RPG.Control
         Health health;
         GameObject player;
 
+        public bool isNotified;
+
         Vector3 guardPosition;
         int currentWaypointIndex = 0;
         #endregion
@@ -39,6 +41,8 @@ namespace RPG.Control
             health = GetComponent<Health>();
             player = GameObject.FindGameObjectWithTag("Player");
 
+            isNotified = false;
+
             guardPosition = transform.position;
         }
 
@@ -46,16 +50,18 @@ namespace RPG.Control
         {
             if (health.IsDead) return;
 
-            if (TargetInAttackRange(player) && fighter.CanAttack(player))
+            if ((TargetInAttackRange(player) || isNotified) && fighter.CanAttack(player))
             {
                 AttackBehaviour();
             }
             else if (timeSinceLastSawPlayer < suspicionTime)
             {
+                isNotified = false;
                 SuspicionBehaviour();
             }
             else
             {
+                isNotified = false;
                 PatrolBehaviour(randomPatrol);
             }
 
@@ -69,13 +75,13 @@ namespace RPG.Control
         }
 
         #region ATTACK
-        private void AttackBehaviour()
+        public void AttackBehaviour()
         {
             fighter.Attack(player);
             timeSinceLastSawPlayer = 0;
         }
 
-        private bool TargetInAttackRange(GameObject target)
+        public bool TargetInAttackRange(GameObject target)
         {
             return Vector3.Distance(transform.position, target.transform.position) <= chaseDistance;
         }

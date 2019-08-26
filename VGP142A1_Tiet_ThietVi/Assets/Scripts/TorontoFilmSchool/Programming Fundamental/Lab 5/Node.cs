@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Node<Data> : MonoBehaviour
+public class Node<Data>
 {
     Data m_data;
     List<Node<Data>> m_neighbors = new List<Node<Data>>();

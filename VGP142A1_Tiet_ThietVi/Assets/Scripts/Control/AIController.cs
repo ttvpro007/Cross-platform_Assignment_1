@@ -28,7 +28,7 @@ namespace RPG.Control
         Health health;
         GameObject player;
 
-        public bool isNotified;
+        public bool isAggroed;
 
         Vector3 guardPosition;
         int currentWaypointIndex = 0;
@@ -41,7 +41,7 @@ namespace RPG.Control
             health = GetComponent<Health>();
             player = GameObject.FindGameObjectWithTag("Player");
 
-            isNotified = false;
+            isAggroed = false;
 
             guardPosition = transform.position;
         }
@@ -50,18 +50,16 @@ namespace RPG.Control
         {
             if (health.IsDead) return;
 
-            if ((TargetInAttackRange(player) || isNotified) && fighter.CanAttack(player))
+            if ((TargetInAttackRange(player) || isAggroed) && fighter.CanAttack(player))
             {
                 AttackBehaviour();
             }
             else if (timeSinceLastSawPlayer < suspicionTime)
             {
-                isNotified = false;
                 SuspicionBehaviour();
             }
             else
             {
-                isNotified = false;
                 PatrolBehaviour(randomPatrol);
             }
 

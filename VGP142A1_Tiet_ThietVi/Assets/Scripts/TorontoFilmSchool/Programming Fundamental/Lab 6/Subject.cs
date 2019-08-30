@@ -19,6 +19,17 @@ namespace ObserverPattern
             }
         }
 
+        public void Notify(bool check)
+        {
+            if (observers.Count > 0)
+            {
+                foreach (Observer observer in observers)
+                {
+                    observer.OnNotify(check);
+                }
+            }
+        }
+
         public void AddObserver(Observer observer)
         {
             observers.Add(observer);

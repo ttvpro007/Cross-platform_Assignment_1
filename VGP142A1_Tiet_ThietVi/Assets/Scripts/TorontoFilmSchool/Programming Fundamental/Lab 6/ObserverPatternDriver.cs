@@ -4,6 +4,7 @@ using UnityEngine;
 using ObserverPattern;
 using RPG.Combat;
 using RPG.Control;
+using RPG.Core;
 
 public class ObserverPatternDriver : MonoBehaviour
 {
@@ -11,8 +12,7 @@ public class ObserverPatternDriver : MonoBehaviour
     Enemy enemy;
     GameObject target;
     Subject subject;
-
-    // Start is called before the first frame update
+    
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player");
@@ -25,12 +25,15 @@ public class ObserverPatternDriver : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (CheckTargetInRange() && CheckCanAttack())
         {
-            subject.Notify();
+            subject.Notify(true);
+        }
+        else
+        {
+            subject.Notify(false);
         }
     }
 

@@ -18,6 +18,8 @@ public class WeightHandle : MonoBehaviour
     {
         self = GetComponentInParent<PatrolPathGraph>().graph.FindNode(gameObject);
 
+        if (self == null) return;
+
         WeightedEdge<GameObject> currentEdge;
         Vector3 textPositionToNeighbor = new Vector3();
         Vector3 textPositionFromNeighbor = new Vector3();

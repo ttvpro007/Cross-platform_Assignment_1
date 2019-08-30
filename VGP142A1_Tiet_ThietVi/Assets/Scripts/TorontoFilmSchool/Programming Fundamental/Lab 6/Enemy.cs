@@ -21,8 +21,12 @@ namespace ObserverPattern
 
         public override void OnNotify()
         {
-            aiController.isNotified = true;
             //attack.Execute(self);
+        }
+
+        public override void OnNotify(bool check)
+        {
+            aiController.isAggroed = check;
         }
     }
 }

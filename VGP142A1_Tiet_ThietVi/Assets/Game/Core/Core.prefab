@@ -340,6 +340,11 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 2993132342851158536}
+    - target: {fileID: 8214698890664085918, guid: 37fddb7ada38cdb479bad2bb9ef2c7c7,
+        type: 3}
+      propertyPath: m_LookaheadTime
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37fddb7ada38cdb479bad2bb9ef2c7c7, type: 3}
 --- !u!4 &2046390753338065538 stripped

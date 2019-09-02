@@ -48,7 +48,11 @@ namespace RPG.Control
 
         private void Update()
         {
-            if (health.IsDead) return;
+            if (health.IsDead)
+            {
+                chaseDistance = 0.0f;
+                return;
+            }
 
             if ((TargetInAttackRange(player) || isAggroed) && fighter.CanAttack(player))
             {

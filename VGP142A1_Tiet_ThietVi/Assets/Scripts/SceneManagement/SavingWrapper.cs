@@ -42,5 +42,20 @@ namespace RPG.SceneManagement
         {
             GetComponent<SavingSystem>().Load(defaultSaveFile);
         }
+
+        public void Load(int buildIndex)
+        {
+            GetComponent<SavingSystem>().Load(buildIndex);
+        }
+
+        public void Delete()
+        {
+            GetComponent<SavingSystem>().Delete(defaultSaveFile);
+        }
+
+        public bool SaveFileExists()
+        {
+            return GetComponent<SavingSystem>().SaveFileExists(defaultSaveFile);
+        }
     }
 }

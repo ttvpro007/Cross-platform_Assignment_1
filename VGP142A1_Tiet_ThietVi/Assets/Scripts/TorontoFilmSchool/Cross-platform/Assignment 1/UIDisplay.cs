@@ -36,11 +36,11 @@ public class UIDisplay : MonoBehaviour
 
     void UpdateText()
     {
-        playerHPText.text = "HP: " + controller.transform.GetComponent<Health>().healthPoints.ToString();
+        playerHPText.text = "HP: " + controller.transform.GetComponent<Health>().HealthPoints.ToString();
 
         if (controller.targetTransform == null) return;
         target = controller.targetTransform;
-        enemyHPText.text = "HP: " + target.GetComponent<Health>().healthPoints.ToString();
+        enemyHPText.text = "HP: " + target.GetComponent<Health>().HealthPoints.ToString();
         enemyNameText.text = target.name;
         
         if (objective && objective.completed)

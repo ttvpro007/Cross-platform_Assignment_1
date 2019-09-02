@@ -7,22 +7,29 @@ namespace RPG.Core
 {
     public class Health : MonoBehaviour, ISaveable
     {
-        [SerializeField] public float healthPoints = 100f;
+        [SerializeField] public float startHealth = 100f;
+
+        float healthPoints;
+
+        public float HealthPoints { get { return healthPoints; } set { healthPoints = value; } }
+
         [Range(0.0f, 1.0f)]
         [SerializeField] public float defenceRating = 0.0f;
 
         bool isDead = false;
 
-        public bool IsDead
+        public bool IsDead { get { return healthPoints == 0; } }
+
+        private void Start()
         {
-            get { return isDead; }
+            healthPoints = startHealth;
         }
 
         public void TakeDamage(float damage)
         {
             healthPoints = Mathf.Max(healthPoints - (damage * (1 - defenceRating)), 0);
 
-            print(healthPoints);
+            Debug.Log(healthPoints);
 
             if (healthPoints == 0)
             {
@@ -35,8 +42,20 @@ namespace RPG.Core
             if (isDead) return;
 
             GetComponent<Animator>().SetTrigger("die");
+            GetComponent<Animator>().SetBool("dead", true);
             GetComponent<ActionScheduler>().CancelCurrentAction();
-            isDead = true;
+        }
+
+        public void ResetAnimationParameters()
+        {
+            GetComponent<Animator>().ResetTrigger("die");
+            GetComponent<Animator>().SetBool("dead", false);
+            GetComponent<Animator>().ResetTrigger("cancelAttack");
+        }
+
+        public void ResetHealth()
+        {
+            healthPoints = startHealth;
         }
 
         public object CaptureState()
@@ -51,6 +70,10 @@ namespace RPG.Core
             if (healthPoints == 0)
             {
                 Die();
+            }
+            else
+            {
+                ResetAnimationParameters();
             }
         }
     }

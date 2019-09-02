@@ -34,7 +34,7 @@ public class Objective : MonoBehaviour
 
     private bool ObjectiveCompleted()
     {
-        if (target.GetComponent<Health>().healthPoints == 0)
+        if (target.GetComponent<Health>().HealthPoints == 0)
             return true;
         else
             return false;

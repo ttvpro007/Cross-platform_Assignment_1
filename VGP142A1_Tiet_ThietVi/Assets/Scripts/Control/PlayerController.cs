@@ -25,6 +25,7 @@ namespace RPG.Control
 
         void Update()
         {
+            if (PauseMenu.GameIsPaused) return;
             if (health.IsDead) return;
             if (InteractWithCombat()) return;
             if (InteractWithMovement()) return;

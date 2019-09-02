@@ -1,18 +1,19 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using RPG.Movement;
 using RPG.Core;
-using System;
+using RPG.Saving;
 
 namespace RPG.Combat
 {
-    public class Fighter : MonoBehaviour, IAction
+    public class Fighter : MonoBehaviour, IAction, ISaveable
     {
-        [SerializeField] float timeBetweenAttacks = 1.5f;
         [SerializeField] Transform rightHandTransform = null;
         [SerializeField] Transform leftHandTransform = null;
         [SerializeField] Weapon defaultWeapon = null;
+        [SerializeField] string defaultWeaponName = "Unarmed";
 
         Health target;
 
@@ -22,7 +23,10 @@ namespace RPG.Combat
 
         private void Start()
         {
-            EquipWeapon(defaultWeapon);
+            if (currentWeapon == null)
+            {
+                EquipWeapon(defaultWeapon);
+            }
         }
 
         private void Update()
@@ -48,6 +52,7 @@ namespace RPG.Combat
         {
             if (!weapon || currentWeapon == weapon) return;
             currentWeapon = weapon;
+
             Animator animator = GetComponent<Animator>();
             weapon.Spawn(rightHandTransform, leftHandTransform, animator);
         }
@@ -63,7 +68,7 @@ namespace RPG.Combat
         {
             transform.LookAt(target.transform);
 
-            if (timeSinceLastAttack >= timeBetweenAttacks)
+            if (timeSinceLastAttack >= currentWeapon.WeaponAttackRate)
             {
                 // Trigger animation Hit() event
                 TriggerAttackAnimation();
@@ -120,6 +125,18 @@ namespace RPG.Combat
         void Shoot()
         {
             Hit();
+        }
+
+        public object CaptureState()
+        {
+            return (currentWeapon) ? currentWeapon.name : "Unarmed";
+        }
+
+        public void RestoreState(object state)
+        {
+            string weaponName = (string)state;
+            Weapon weapon = Resources.Load<Weapon>(weaponName);
+            EquipWeapon(weapon);
         }
     }
 }

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
+using RPG.Core;
+using RPG.Control;
 
 namespace RPG.SceneManagement
 {
@@ -20,6 +22,17 @@ namespace RPG.SceneManagement
         [SerializeField] float fadeOutTime = 2.0f;
         [SerializeField] float fadeWaitTime = 2.0f;
         [SerializeField] float fadeInTime = 2.0f;
+
+        GameObject player;
+
+        GameObject uiCanvas;
+
+        private void Start()
+        {
+            player = GameObject.FindWithTag("Player");
+
+            uiCanvas = GameObject.FindWithTag("UICanvas");
+        }
 
         private void OnTriggerEnter(Collider c)
         {
@@ -40,6 +53,8 @@ namespace RPG.SceneManagement
 
             DontDestroyOnLoad(gameObject);
 
+            DisableControl();
+
             Fader fader = FindObjectOfType<Fader>();
 
             yield return fader.FadeOut(fadeOutTime);
@@ -59,12 +74,14 @@ namespace RPG.SceneManagement
             yield return new WaitForSeconds(fadeWaitTime);
             yield return fader.FadeIn(fadeInTime);
 
+            EnableControl();
+
             Destroy(gameObject);
         }
 
         private void UpdatePlayer(Portal otherPortal)
         {
-            GameObject player = GameObject.FindWithTag("Player");
+            if (!player) return;
             player.GetComponent<NavMeshAgent>().enabled = false;
             player.transform.position = otherPortal.spawnPoint.position;
             player.transform.rotation = otherPortal.spawnPoint.rotation;
@@ -83,6 +100,28 @@ namespace RPG.SceneManagement
             }
 
             return null;
+        }
+
+        void DisableControl()
+        {
+            if (!player) return;
+
+            player.GetComponent<ActionScheduler>().CancelCurrentAction();
+
+            player.GetComponent<PlayerController>().enabled = false;
+
+            // Cross-platform edit
+            uiCanvas.SetActive(false);
+        }
+
+        void EnableControl()
+        {
+            if (!player) return;
+
+            player.GetComponent<PlayerController>().enabled = true;
+
+            // Cross-platform edit
+            uiCanvas.SetActive(true);
         }
     }
 }

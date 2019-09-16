@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using RPG.Movement;
 using RPG.Combat;
-using RPG.Core;
+using RPG.Resources;
 
 namespace RPG.Control
 {
@@ -18,7 +15,7 @@ namespace RPG.Control
         // Cross-platform edit
         public Transform targetTransform;
 
-        private void Start()
+        private void Awake()
         {
             health = GetComponent<Health>();
         }

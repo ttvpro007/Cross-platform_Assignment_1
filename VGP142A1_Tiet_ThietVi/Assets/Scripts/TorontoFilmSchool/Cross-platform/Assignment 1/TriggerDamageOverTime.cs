@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using RPG.Core;
+﻿using UnityEngine;
+using RPG.Resources;
 
 public class TriggerDamageOverTime : MonoBehaviour
 {
@@ -26,7 +24,7 @@ public class TriggerDamageOverTime : MonoBehaviour
     {
         if (c.gameObject.tag == "Player" && timeSinceLastDamage >= timeBetweenDamage)
         {
-            c.GetComponent<Health>().TakeDamage(damage);
+            c.GetComponent<Health>().TakeDamage(gameObject, damage);
             timeSinceLastDamage = 0.0f;
         }
     }

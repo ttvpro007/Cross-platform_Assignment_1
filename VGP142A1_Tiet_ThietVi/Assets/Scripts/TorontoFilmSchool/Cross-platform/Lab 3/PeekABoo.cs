@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PeekABoo : MonoBehaviour
 {
@@ -9,10 +7,14 @@ public class PeekABoo : MonoBehaviour
     public bool isSeen;
     public string myName;
 
+    private void Awake()
+    {
+        controller = GetComponent<EnemyController>();
+    }
+
     void Start()
     {
         myName = transform.name;
-        controller = GetComponent<EnemyController>();
     }
 
     void Update()

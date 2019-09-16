@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -13,7 +11,7 @@ namespace RPG.SceneManagement
     {
         enum DestinationIdentifier
         {
-            A, B, C, D, E
+            A, B, C, D
         }
 
         [SerializeField] int sceneToLoad = -1;
@@ -25,14 +23,12 @@ namespace RPG.SceneManagement
 
         GameObject player;
 
-        GameObject uiCanvas;
+        // GameObject uiCanvas;
 
-        private void Start()
-        {
-            player = GameObject.FindWithTag("Player");
-
-            uiCanvas = GameObject.FindWithTag("UICanvas");
-        }
+        // private void Start()
+        // {
+        //     uiCanvas = GameObject.FindWithTag("UICanvas");
+        // }
 
         private void OnTriggerEnter(Collider c)
         {
@@ -81,6 +77,7 @@ namespace RPG.SceneManagement
 
         private void UpdatePlayer(Portal otherPortal)
         {
+            player = GameObject.FindWithTag("Player");
             if (!player) return;
             player.GetComponent<NavMeshAgent>().enabled = false;
             player.transform.position = otherPortal.spawnPoint.position;
@@ -111,7 +108,7 @@ namespace RPG.SceneManagement
             player.GetComponent<PlayerController>().enabled = false;
 
             // Cross-platform edit
-            uiCanvas.SetActive(false);
+            // uiCanvas.SetActive(false);
         }
 
         void EnableControl()
@@ -121,7 +118,7 @@ namespace RPG.SceneManagement
             player.GetComponent<PlayerController>().enabled = true;
 
             // Cross-platform edit
-            uiCanvas.SetActive(true);
+            // uiCanvas.SetActive(true);
         }
     }
 }

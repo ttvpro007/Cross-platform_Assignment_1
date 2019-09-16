@@ -1,8 +1,8 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using RPG.Control;
-using RPG.Core;
+using RPG.Resources;
+using System;
 
 public class PowerUpController : MonoBehaviour
 {
@@ -26,11 +26,14 @@ public class PowerUpController : MonoBehaviour
     public float debugGodMode;
     public float debugSpeedMode;
 
-    private void Start()
+    private void Awake()
     {
         playerController = GetComponent<PlayerController>();
         player = GetComponent<Health>();
+    }
 
+    private void Start()
+    {
         godMode = false;
         speedMode = false;
         isGodding = false;
@@ -63,25 +66,45 @@ public class PowerUpController : MonoBehaviour
 
     private IEnumerator StopSpeedBoost(float timer)
     {
-        playerController.moveSpeedFraction *= speedBoostMultiplier;
-        debugSpeedMode = playerController.moveSpeedFraction;
+        ActivateSpeedBoost();
         yield return new WaitForSeconds(timer);
+        DisableSpeedBoost();
+    }
+
+    private void DisableSpeedBoost()
+    {
         playerController.moveSpeedFraction /= speedBoostMultiplier;
         debugSpeedMode = playerController.moveSpeedFraction;
         speedMode = false;
         isSpeeding = false;
     }
 
+    private void ActivateSpeedBoost()
+    {
+        playerController.moveSpeedFraction *= speedBoostMultiplier;
+        debugSpeedMode = playerController.moveSpeedFraction;
+    }
+
     private IEnumerator StopGodBoost(float timer)
     {
-        currentDefenceRating = player.defenceRating;
-        player.defenceRating = 1.0f;
-        debugGodMode = player.defenceRating;
+        ActivateGodMode();
         yield return new WaitForSeconds(timer);
+        DisableGodMode();
+    }
+
+    private void DisableGodMode()
+    {
         player.defenceRating = currentDefenceRating;
         debugGodMode = player.defenceRating;
         godMode = false;
         isGodding = false;
+    }
+
+    private void ActivateGodMode()
+    {
+        currentDefenceRating = player.defenceRating;
+        player.defenceRating = 1.0f;
+        debugGodMode = player.defenceRating;
     }
 
     private void OnTriggerEnter(Collider c)

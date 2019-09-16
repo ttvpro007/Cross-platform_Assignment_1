@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.AI;
+﻿using UnityEngine;
 using RPG.Movement;
 
 public class ParticleSystemController : MonoBehaviour
@@ -10,7 +7,7 @@ public class ParticleSystemController : MonoBehaviour
     PowerUpController powerUpController;
     public bool isMoving;
 
-    private void Start()
+    private void Awake()
     {
         particleSystems = transform.GetComponentsInChildren<ParticleSystem>();
         powerUpController = GetComponentInParent<PowerUpController>();

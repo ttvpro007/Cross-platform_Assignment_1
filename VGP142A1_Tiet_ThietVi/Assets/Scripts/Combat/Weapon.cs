@@ -1,28 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using RPG.Core;
-using System;
+﻿using UnityEngine;
+using RPG.Resources;
 
 namespace RPG.Combat
 {
-    [CreateAssetMenu(fileName = "Weapon", menuName = "RPG/Weapons/Make New Weapon", order = 0)]
+    [CreateAssetMenu(fileName = "Weapon", menuName = "RPG/Weapon/New Weapon", order = 0)]
     public class Weapon : ScriptableObject
     {
         [SerializeField] AnimatorOverrideController attackAnimationOverride = null;
         [SerializeField] GameObject equippedPrefab = null;
         [SerializeField] Projectile projectile = null;
-        [SerializeField] float weaponRange = 1.0f;
-        [SerializeField] float weaponDamage = 3.0f;
+        [SerializeField] float range = 1.0f;
+        [SerializeField] float damage = 3.0f;
+        [SerializeField] float damagePercentageBonus = 0f;
         [SerializeField] float attackPerSecond = 0.5f;
         [SerializeField] bool isRightHanded = true;
 
         const string weaponName = "Weapon";
 
         public bool HasProjectile { get { return projectile != null; } }
-        public float WeaponRange { get { return weaponRange; } }
-        public float WeaponDamage { get { return weaponDamage; } }
-        public float WeaponAttackRate { get { return 1 / attackPerSecond; } }
+        public float Range { get { return range; } }
+        public float Damage { get { return damage; } }
+        public float DamageBuffPercentage { get { return damagePercentageBonus; } }
+        public float AttackRate { get { return 1 / attackPerSecond; } }
 
         public void Spawn(Transform rightHand, Transform leftHand, Animator animator)
         {
@@ -71,10 +70,10 @@ namespace RPG.Combat
             return equipHand;
         }
 
-        public void ShootProjectile(Transform rightHand, Transform leftHand, Health target)
+        public void ShootProjectile(Transform rightHand, Transform leftHand, Health target, GameObject instigator, float calculatedDamage)
         {
             Projectile projectileInstance = Instantiate(projectile, GetEquipHand(rightHand, leftHand).position, Quaternion.identity);
-            projectileInstance.SetTarget(target, weaponDamage);
+            projectileInstance.SetTarget(instigator, target, calculatedDamage);
         }
     }
 }

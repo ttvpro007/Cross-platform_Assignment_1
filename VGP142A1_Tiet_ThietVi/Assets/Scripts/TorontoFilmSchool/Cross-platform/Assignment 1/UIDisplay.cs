@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using RPG.Control;
-using RPG.Core;
+using RPG.Resources;
 
 public class UIDisplay : MonoBehaviour
 {
@@ -19,7 +17,7 @@ public class UIDisplay : MonoBehaviour
     Objective objective;
     PowerUpController powerUpController;
 
-    private void Start()
+    private void Awake()
     {
         controller = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 
@@ -36,11 +34,11 @@ public class UIDisplay : MonoBehaviour
 
     void UpdateText()
     {
-        playerHPText.text = "HP: " + controller.transform.GetComponent<Health>().HealthPoints.ToString();
+        playerHPText.text = "HP: " + controller.transform.GetComponent<Health>().HP.ToString();
 
         if (controller.targetTransform == null) return;
         target = controller.targetTransform;
-        enemyHPText.text = "HP: " + target.GetComponent<Health>().HealthPoints.ToString();
+        enemyHPText.text = "HP: " + target.GetComponent<Health>().HP.ToString();
         enemyNameText.text = target.name;
         
         if (objective && objective.completed)

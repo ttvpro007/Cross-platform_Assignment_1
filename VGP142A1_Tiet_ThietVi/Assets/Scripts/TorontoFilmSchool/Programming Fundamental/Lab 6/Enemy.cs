@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using RPG.Combat;
+﻿using UnityEngine;
 using RPG.Control;
 
 namespace ObserverPattern

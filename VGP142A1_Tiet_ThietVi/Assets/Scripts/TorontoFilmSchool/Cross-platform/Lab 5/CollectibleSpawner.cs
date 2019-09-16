@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using RPG.Core;
+﻿using UnityEngine;
+using RPG.Resources;
 
 public class CollectibleSpawner : MonoBehaviour
 {
@@ -9,9 +7,13 @@ public class CollectibleSpawner : MonoBehaviour
     [SerializeField] GameObject[] collectiblePrefab;
     bool hasSpawned;
 
-    private void Start()
+    private void Awake()
     {
         if (!spawnPoint) spawnPoint = GetComponent<Transform>();
+    }
+
+    private void Start()
+    {
 
         if (collectiblePrefab.Length == 0)
         {

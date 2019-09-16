@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
-using RPG.Core;
+using RPG.Resources;
 
 public class Objective : MonoBehaviour
 {
@@ -12,7 +10,7 @@ public class Objective : MonoBehaviour
 
     bool isWaiting = false;
 
-    private void Start()
+    private void Awake()
     {
         if (!target)
             target = GameObject.Find("EnemyBoss").GetComponent<Health>();
@@ -34,7 +32,7 @@ public class Objective : MonoBehaviour
 
     private bool ObjectiveCompleted()
     {
-        if (target.GetComponent<Health>().HealthPoints == 0)
+        if (target.GetComponent<Health>().HP == 0)
             return true;
         else
             return false;

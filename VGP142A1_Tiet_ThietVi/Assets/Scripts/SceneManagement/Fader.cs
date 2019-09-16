@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace RPG.SceneManagement
@@ -8,7 +7,7 @@ namespace RPG.SceneManagement
     {
         CanvasGroup canvasGroup;
 
-        private void Start()
+        private void Awake()
         {
             canvasGroup = GetComponent<CanvasGroup>();
         }
@@ -27,7 +26,8 @@ namespace RPG.SceneManagement
 
         public IEnumerator FadeOut(float time)
         {
-            while (canvasGroup.alpha < 1)
+            //while (canvasGroup.alpha < 1)
+            while (canvasGroup.alpha < 0.1)
             {
                 canvasGroup.alpha += Mathf.Clamp01(Time.deltaTime / time);
                 yield return null;

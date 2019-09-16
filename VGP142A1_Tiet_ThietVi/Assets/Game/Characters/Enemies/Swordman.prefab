@@ -83,6 +83,23 @@ PrefabInstance:
       propertyPath: leftHandTransform
       value: 
       objectReference: {fileID: 6374496713934945940}
+    - target: {fileID: 8881531994317812806, guid: 9ff8f033fe8105248879ea8c40ee29a1,
+        type: 3}
+      propertyPath: collectiblePrefab.Array.data[0]
+      value: 
+      objectReference: {fileID: 3539634243078367906, guid: 0f817cb924c8c034c8d16f61cf9f7d2e,
+        type: 3}
+    - target: {fileID: 8881531994317812806, guid: 9ff8f033fe8105248879ea8c40ee29a1,
+        type: 3}
+      propertyPath: collectiblePrefab.Array.data[1]
+      value: 
+      objectReference: {fileID: 3539634243078367906, guid: 0effbe861a7f9c14fba2ce5bc57a81e8,
+        type: 3}
+    - target: {fileID: 6156058168064673423, guid: 9ff8f033fe8105248879ea8c40ee29a1,
+        type: 3}
+      propertyPath: characterClass
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 552616297834404567, guid: 9ff8f033fe8105248879ea8c40ee29a1,
         type: 3}
       propertyPath: m_Bones.Array.data[0]

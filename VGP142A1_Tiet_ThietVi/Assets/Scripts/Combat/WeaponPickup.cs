@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace RPG.Combat
@@ -7,6 +6,7 @@ namespace RPG.Combat
     public class WeaponPickup : MonoBehaviour
     {
         [SerializeField] Weapon weapon = null;
+        [SerializeField] float respawnTime = 5f;
 
         private void OnTriggerEnter(Collider c)
         {
@@ -16,7 +16,24 @@ namespace RPG.Combat
 
                 c.GetComponent<Fighter>().EquipWeapon(weapon);
 
-                Destroy(gameObject);
+                StartCoroutine(DisableForSeconds(respawnTime));
+            }
+        }
+
+        private IEnumerator DisableForSeconds(float timer)
+        {
+            ShowPickup(false);
+            yield return new WaitForSeconds(timer);
+            ShowPickup(true);
+        }
+
+        private void ShowPickup(bool shouldShow)
+        {
+            GetComponent<Collider>().enabled = shouldShow;
+
+            foreach (Transform child in transform)
+            {
+                child.gameObject.SetActive(shouldShow);
             }
         }
     }

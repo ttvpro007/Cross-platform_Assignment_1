@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-
-namespace ObserverPattern
+﻿namespace ObserverPattern
 {
     public abstract class Observer
     {

@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using ObserverPattern;
 using RPG.Combat;
 using RPG.Control;
-using RPG.Core;
 
 public class ObserverPatternDriver : MonoBehaviour
 {
@@ -12,10 +9,14 @@ public class ObserverPatternDriver : MonoBehaviour
     Enemy enemy;
     GameObject target;
     Subject subject;
-    
-    void Start()
+
+    private void Awake()
     {
         target = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    void Start()
+    {
         subject = new Subject();
 
         foreach (GameObject e in enemies)

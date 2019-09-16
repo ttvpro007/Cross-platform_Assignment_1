@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using RPG.Combat;
 using RPG.Movement;
 using RPG.Core;
+using RPG.Resources;
+using GameDevTV.Utils;
 using System;
 
 namespace RPG.Control
@@ -28,22 +28,30 @@ namespace RPG.Control
         Health health;
         GameObject player;
 
-        public bool isAggroed;
+        public bool isAggroed = false;
 
-        Vector3 guardPosition;
+        LazyValue<Vector3> guardPosition;
         int currentWaypointIndex = 0;
         #endregion
 
-        private void Start()
+        private void Awake()
         {
             fighter = GetComponent<Fighter>();
             mover = GetComponent<Mover>();
             health = GetComponent<Health>();
             player = GameObject.FindGameObjectWithTag("Player");
 
-            isAggroed = false;
+            guardPosition = new LazyValue<Vector3>(GetInitialGuardPosition);
+        }
 
-            guardPosition = transform.position;
+        private Vector3 GetInitialGuardPosition()
+        {
+            return transform.position;
+        }
+
+        private void Start()
+        {
+            guardPosition.ForceInit();
         }
 
         private void Update()
@@ -99,7 +107,7 @@ namespace RPG.Control
         #region PATROL
         private void PatrolBehaviour(bool random)
         {
-            Vector3 nextPosition = guardPosition;
+            Vector3 nextPosition = guardPosition.value;
 
             if (!random)
             {

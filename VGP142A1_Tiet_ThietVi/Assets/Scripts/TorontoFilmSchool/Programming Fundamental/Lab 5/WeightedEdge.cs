@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-
-public class WeightedEdge<Data>
+﻿public class WeightedEdge<Data>
 {
     Node<Data> m_home;
     Node<Data> m_neighbor;

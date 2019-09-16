@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using RPG.Core;
+using RPG.Resources;
 using RPG.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
@@ -28,7 +26,7 @@ public class PauseMenu : MonoBehaviour
 
     bool isWaiting = false;
 
-    private void Start()
+    private void Awake()
     {
         savingWrapper = FindObjectOfType<SavingWrapper>();
 

@@ -1,14 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace RPG.Core
 {
     public class DestroyAfterFX : MonoBehaviour
     {
+        [SerializeField] GameObject targetToDestroy = null;
+
         private void Start()
         {
-            Destroy(gameObject, GetComponent<ParticleSystem>().main.duration + 0.5f);
+            if (targetToDestroy)
+            {
+                Destroy(targetToDestroy, targetToDestroy.GetComponentInChildren<ParticleSystem>().main.duration + 0.5f);
+            }
+            else
+            {
+                Destroy(gameObject, GetComponent<ParticleSystem>().main.duration + 0.5f);
+            }
         }
     }
 }

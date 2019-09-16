@@ -727,6 +727,11 @@ PrefabInstance:
       propertyPath: rightHandTransform
       value: 
       objectReference: {fileID: 552616297831517829}
+    - target: {fileID: 7162264726677514138, guid: b92e75ed27a46634db3b933ab2cf9923,
+        type: 3}
+      propertyPath: characterClass
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5720158760627323712, guid: b92e75ed27a46634db3b933ab2cf9923,
         type: 3}
       propertyPath: startHealth

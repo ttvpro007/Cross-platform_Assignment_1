@@ -88,6 +88,23 @@ PrefabInstance:
       propertyPath: chaseDistance
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 8881531994317812806, guid: 9ff8f033fe8105248879ea8c40ee29a1,
+        type: 3}
+      propertyPath: collectiblePrefab.Array.data[0]
+      value: 
+      objectReference: {fileID: 7966723172610560860, guid: a9d9c15bbaa0bad4a9b8faad99894822,
+        type: 3}
+    - target: {fileID: 8881531994317812806, guid: 9ff8f033fe8105248879ea8c40ee29a1,
+        type: 3}
+      propertyPath: collectiblePrefab.Array.data[1]
+      value: 
+      objectReference: {fileID: 137705913065220552, guid: dcead01bedc6c384d8d065020dd05d3b,
+        type: 3}
+    - target: {fileID: 6156058168064673423, guid: 9ff8f033fe8105248879ea8c40ee29a1,
+        type: 3}
+      propertyPath: characterClass
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 552616297834404567, guid: 9ff8f033fe8105248879ea8c40ee29a1,
         type: 3}
       propertyPath: m_Bones.Array.data[0]

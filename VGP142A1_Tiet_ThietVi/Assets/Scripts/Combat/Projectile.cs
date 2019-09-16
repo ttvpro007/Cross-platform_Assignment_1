@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using RPG.Core;
+﻿using UnityEngine;
+using RPG.Resources;
 
 namespace RPG.Combat
 {
@@ -17,6 +14,7 @@ namespace RPG.Combat
         [SerializeField] bool homing = false;
 
         Health target = null;
+        GameObject instigator = null;
 
         private void Start()
         {
@@ -36,8 +34,9 @@ namespace RPG.Combat
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
 
-        public void SetTarget(Health target, float damage)
+        public void SetTarget(GameObject instigator, Health target, float damage)
         {
+            this.instigator = instigator;
             this.target = target;
             this.damage += damage;
         }
@@ -60,7 +59,7 @@ namespace RPG.Combat
 
             if (target.IsDead) return;
 
-            target.TakeDamage(damage);
+            target.TakeDamage(instigator, damage);
 
             speed = 0.0f;
 

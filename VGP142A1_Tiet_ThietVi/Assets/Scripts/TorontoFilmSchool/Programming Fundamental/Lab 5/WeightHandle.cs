@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteInEditMode]
@@ -9,6 +8,11 @@ public class WeightHandle : MonoBehaviour
     public List<Vector3> textPositions;
     public List<float> weights;
 
+    private void Awake()
+    {
+        self = GetComponentInParent<PatrolPathGraph>().graph.FindNode(gameObject);
+    }
+
     private void Start()
     {
         Initiate();
@@ -16,8 +20,6 @@ public class WeightHandle : MonoBehaviour
 
     private void Initiate()
     {
-        self = GetComponentInParent<PatrolPathGraph>().graph.FindNode(gameObject);
-
         if (self == null) return;
 
         WeightedEdge<GameObject> currentEdge;

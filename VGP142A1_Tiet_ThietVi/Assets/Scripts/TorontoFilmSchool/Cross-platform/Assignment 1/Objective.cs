@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
-using RPG.Resources;
+using RPG.Attributes;
 
 public class Objective : MonoBehaviour
 {
@@ -32,7 +32,7 @@ public class Objective : MonoBehaviour
 
     private bool ObjectiveCompleted()
     {
-        if (target.GetComponent<Health>().HP == 0)
+        if (target.GetComponent<Health>().IsDead())
             return true;
         else
             return false;

@@ -12,6 +12,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bow Pickup Red Projectile
       objectReference: {fileID: 0}
+    - target: {fileID: 7333404494787458493, guid: cfff6b6fda5573f419e87f58aa1e271a,
+        type: 3}
+      propertyPath: weapon
+      value: 
+      objectReference: {fileID: 11400000, guid: d1c07b76f97de2a4286efbc8a5c46cd5,
+        type: 2}
     - target: {fileID: 6883971976687899904, guid: cfff6b6fda5573f419e87f58aa1e271a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -67,11 +73,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7333404494787458493, guid: cfff6b6fda5573f419e87f58aa1e271a,
-        type: 3}
-      propertyPath: weapon
-      value: 
-      objectReference: {fileID: 11400000, guid: 0820c89168b50d14189cac616e935959,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfff6b6fda5573f419e87f58aa1e271a, type: 3}

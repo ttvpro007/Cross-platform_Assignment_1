@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using RPG.Control;
-using RPG.Resources;
+using RPG.Attributes;
 using System;
 
 public class PowerUpController : MonoBehaviour

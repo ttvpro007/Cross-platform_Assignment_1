@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using RPG.Resources;
+using RPG.Attributes;
 
 public class CollectibleSpawner : MonoBehaviour
 {
@@ -25,7 +25,7 @@ public class CollectibleSpawner : MonoBehaviour
 
     private void Update()
     {
-        if (GetComponent<Health>().IsDead && !hasSpawned)
+        if (GetComponent<Health>().IsDead() && !hasSpawned)
         {
             SpawnCollectible();
         }

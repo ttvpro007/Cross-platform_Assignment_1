@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using RPG.Control;
-using RPG.Resources;
+using RPG.Attributes;
 
 public class UIDisplay : MonoBehaviour
 {
@@ -34,11 +34,11 @@ public class UIDisplay : MonoBehaviour
 
     void UpdateText()
     {
-        playerHPText.text = "HP: " + controller.transform.GetComponent<Health>().HP.ToString();
+        playerHPText.text = "HP: " + controller.transform.GetComponent<Health>().GetHealthPoints();
 
         if (controller.targetTransform == null) return;
         target = controller.targetTransform;
-        enemyHPText.text = "HP: " + target.GetComponent<Health>().HP.ToString();
+        enemyHPText.text = "HP: " + target.GetComponent<Health>().GetHealthPoints();
         enemyNameText.text = target.name;
         
         if (objective && objective.completed)

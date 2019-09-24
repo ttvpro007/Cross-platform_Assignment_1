@@ -12,6 +12,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bow Pickup Orange Projectile
       objectReference: {fileID: 0}
+    - target: {fileID: 7333404494787458493, guid: cfff6b6fda5573f419e87f58aa1e271a,
+        type: 3}
+      propertyPath: weapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 93070325afb16324d8a729f4a9512c7d,
+        type: 2}
     - target: {fileID: 6883971976687899904, guid: cfff6b6fda5573f419e87f58aa1e271a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -67,11 +73,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7333404494787458493, guid: cfff6b6fda5573f419e87f58aa1e271a,
-        type: 3}
-      propertyPath: weapon
-      value: 
-      objectReference: {fileID: 11400000, guid: 2ba518ea08284b14095b9476de33cc19,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfff6b6fda5573f419e87f58aa1e271a, type: 3}

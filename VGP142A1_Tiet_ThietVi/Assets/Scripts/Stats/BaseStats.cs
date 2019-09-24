@@ -1,26 +1,24 @@
 ﻿using System;
 using UnityEngine;
-using RPG.Saving;
-using System.Collections;
 using GameDevTV.Utils;
 
 namespace RPG.Stats
 {
-    public class BaseStats : MonoBehaviour, ISaveable
+    public class BaseStats : MonoBehaviour
     {
         [Range(1, 100)]
         [SerializeField] int level = 1;
+        [SerializeField] float damageMultiplier = 1;
         [SerializeField] CharacterClass characterClass;
         [SerializeField] Progression progression = null;
         [SerializeField] GameObject levelUpFX = null;
         [SerializeField] bool useModifier = false;
 
-        Experience xp;
-        public Experience XP { get { return xp; } }
+        public event Action onLevelUp;
 
         LazyValue<int> currentLevel;
 
-        public event Action onLevelUp;
+        Experience xp;
 
         private void Awake()
         {
@@ -28,9 +26,14 @@ namespace RPG.Stats
             currentLevel = new LazyValue<int>(CalculateLevel);
         }
 
+        private void Start()
+        {
+            currentLevel.ForceInit();
+        }
+
         private void OnEnable()
         {
-            if (xp)
+            if (xp != null)
             {
                 xp.onXPGained += UpdateLevel;
             }
@@ -38,15 +41,10 @@ namespace RPG.Stats
 
         private void OnDisable()
         {
-            if (xp)
+            if (xp != null)
             {
                 xp.onXPGained -= UpdateLevel;
             }
-        }
-
-        private void Start()
-        {
-            currentLevel.ForceInit();
         }
 
         private void UpdateLevel()
@@ -67,6 +65,9 @@ namespace RPG.Stats
 
         public float GetStat(Stat stat)
         {
+            if (stat == Stat.Damage)
+                return (GetBaseStat(stat) + GetModifier(stat)) * (1 + GetPercentageModifier(stat) / 100) * damageMultiplier;
+
             return (GetBaseStat(stat) + GetModifier(stat)) * (1 + GetPercentageModifier(stat) / 100);
         }
 
@@ -132,16 +133,6 @@ namespace RPG.Stats
             }
 
             return maxLevel + 1;
-        }
-
-        public object CaptureState()
-        {
-            return level;
-        }
-
-        public void RestoreState(object state)
-        {
-            level = (int)state;
         }
     }
 }

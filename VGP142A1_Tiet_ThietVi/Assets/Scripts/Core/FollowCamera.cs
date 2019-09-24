@@ -46,8 +46,6 @@ namespace RPG.Core
 
         private void LateUpdate()
         {
-            if (PauseMenu.GameIsPaused) return;
-
             if (Input.GetMouseButton(1))
             {
                 RotateAroundYAxis();

@@ -6,8 +6,9 @@ namespace RPG.SceneManagement
 {
     public class SavingWrapper : MonoBehaviour
     {
-        const string defaultSaveFile = "VGP142_A1_ThietVi_Tiet";
-        [SerializeField] float fadeInTime = 2.0f;
+        const string defaultSaveFile = "save";
+
+        [SerializeField] float fadeInTime = 0.2f;
 
         private void Awake()
         {
@@ -19,32 +20,23 @@ namespace RPG.SceneManagement
             yield return GetComponent<SavingSystem>().LoadLastScene(defaultSaveFile);
             Fader fader = FindObjectOfType<Fader>();
             fader.FadeOutImmediate();
-            // removed yield return -> resolved Start() duo calls
-            // GetComponent<SavingSystem>().LoadLastScene(defaultSaveFile);
             yield return fader.FadeIn(fadeInTime);
         }
 
-        void Update()
+        private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.F2))
-            {
-                Load();
-            }
-
-            if (Input.GetKeyDown(KeyCode.F1))
+            if (Input.GetKeyDown(KeyCode.F5))
             {
                 Save();
             }
-
+            if (Input.GetKeyDown(KeyCode.F6))
+            {
+                Load();
+            }
             if (Input.GetKeyDown(KeyCode.Delete))
             {
                 Delete();
             }
-        }
-
-        public void Save()
-        {
-            GetComponent<SavingSystem>().Save(defaultSaveFile);
         }
 
         public void Load()
@@ -52,19 +44,14 @@ namespace RPG.SceneManagement
             GetComponent<SavingSystem>().Load(defaultSaveFile);
         }
 
-        public void Load(int buildIndex)
+        public void Save()
         {
-            GetComponent<SavingSystem>().Load(buildIndex);
+            GetComponent<SavingSystem>().Save(defaultSaveFile);
         }
 
         public void Delete()
         {
             GetComponent<SavingSystem>().Delete(defaultSaveFile);
-        }
-
-        public bool SaveFileExists()
-        {
-            return GetComponent<SavingSystem>().SaveFileExists(defaultSaveFile);
         }
     }
 }

@@ -16,30 +16,21 @@ namespace RPG.SceneManagement
 
         [SerializeField] int sceneToLoad = -1;
         [SerializeField] Transform spawnPoint;
-        [SerializeField] DestinationIdentifier destination;
-        [SerializeField] float fadeOutTime = 2.0f;
-        [SerializeField] float fadeWaitTime = 2.0f;
-        [SerializeField] float fadeInTime = 2.0f;
+        [SerializeField] DestinationIdentifier primaryDestination;
+        [SerializeField] DestinationIdentifier secondaryDestination;
+        [SerializeField] float fadeOutTime = 1f;
+        [SerializeField] float fadeInTime = 2f;
+        [SerializeField] float fadeWaitTime = 0.5f;
 
-        GameObject player;
-
-        // GameObject uiCanvas;
-
-        // private void Start()
-        // {
-        //     uiCanvas = GameObject.FindWithTag("UICanvas");
-        // }
-
-        private void OnTriggerEnter(Collider c)
+        private void OnTriggerEnter(Collider other)
         {
-            if (c.gameObject.tag == "Player")
+            if (other.tag == "Player")
             {
-                Debug.Log("Entered the portal");
-                StartCoroutine(SceneTransition());
+                StartCoroutine(Transition());
             }
         }
 
-        private IEnumerator SceneTransition()
+        private IEnumerator Transition()
         {
             if (sceneToLoad < 0)
             {
@@ -49,17 +40,20 @@ namespace RPG.SceneManagement
 
             DontDestroyOnLoad(gameObject);
 
-            DisableControl();
-
             Fader fader = FindObjectOfType<Fader>();
+            SavingWrapper savingWrapper = FindObjectOfType<SavingWrapper>();
+            PlayerController playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+            playerController.enabled = false;
 
             yield return fader.FadeOut(fadeOutTime);
-            
-            SavingWrapper savingWrapper = FindObjectOfType<SavingWrapper>();
+
             savingWrapper.Save();
 
             yield return SceneManager.LoadSceneAsync(sceneToLoad);
-            
+            PlayerController newPlayerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+            newPlayerController.enabled = false;
+
+
             savingWrapper.Load();
 
             Portal otherPortal = GetOtherPortal();
@@ -68,17 +62,15 @@ namespace RPG.SceneManagement
             savingWrapper.Save();
 
             yield return new WaitForSeconds(fadeWaitTime);
-            yield return fader.FadeIn(fadeInTime);
+            fader.FadeIn(fadeInTime);
 
-            EnableControl();
-
+            newPlayerController.enabled = true;
             Destroy(gameObject);
         }
 
         private void UpdatePlayer(Portal otherPortal)
         {
-            player = GameObject.FindWithTag("Player");
-            if (!player) return;
+            GameObject player = GameObject.FindWithTag("Player");
             player.GetComponent<NavMeshAgent>().enabled = false;
             player.transform.position = otherPortal.spawnPoint.position;
             player.transform.rotation = otherPortal.spawnPoint.rotation;
@@ -87,38 +79,23 @@ namespace RPG.SceneManagement
 
         private Portal GetOtherPortal()
         {
+            Portal[] portals = FindObjectsOfType<Portal>();
+
+            foreach (Portal portal in portals)
+            {
+                if (portal == this) continue;
+                if (portal.primaryDestination != primaryDestination) continue;
+                return portal;
+            }
+
             foreach (Portal portal in FindObjectsOfType<Portal>())
             {
                 if (portal == this) continue;
-
-                if (portal.destination != destination) continue;
-
+                if (portal.secondaryDestination != secondaryDestination) continue;
                 return portal;
             }
 
             return null;
-        }
-
-        void DisableControl()
-        {
-            if (!player) return;
-
-            player.GetComponent<ActionScheduler>().CancelCurrentAction();
-
-            player.GetComponent<PlayerController>().enabled = false;
-
-            // Cross-platform edit
-            // uiCanvas.SetActive(false);
-        }
-
-        void EnableControl()
-        {
-            if (!player) return;
-
-            player.GetComponent<PlayerController>().enabled = true;
-
-            // Cross-platform edit
-            // uiCanvas.SetActive(true);
         }
     }
 }

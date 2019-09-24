@@ -12,6 +12,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Speed Power Up
       objectReference: {fileID: 0}
+    - target: {fileID: 3465414900365669236, guid: 95458f2367a4e594ab2368fe8a146021,
+        type: 3}
+      propertyPath: collectibleType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1794201994909496971, guid: 95458f2367a4e594ab2368fe8a146021,
         type: 3}
       propertyPath: m_LocalPosition.x

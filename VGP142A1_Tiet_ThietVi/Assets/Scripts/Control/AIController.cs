@@ -2,7 +2,7 @@
 using RPG.Combat;
 using RPG.Movement;
 using RPG.Core;
-using RPG.Resources;
+using RPG.Attributes;
 using GameDevTV.Utils;
 using System;
 
@@ -56,7 +56,7 @@ namespace RPG.Control
 
         private void Update()
         {
-            if (health.IsDead)
+            if (health.IsDead())
             {
                 chaseDistance = 0.0f;
                 return;

@@ -33,16 +33,6 @@ namespace RPG.Saving
             RestoreState(LoadFile(saveFile));
         }
 
-        public void Load(int buildIndex)
-        {
-            SceneManager.LoadSceneAsync(buildIndex);
-        }
-
-        public bool SaveFileExists(string saveFile)
-        {
-            return File.Exists(GetPathFromSaveFile(saveFile));
-        }
-
         public void Delete(string saveFile)
         {
             File.Delete(GetPathFromSaveFile(saveFile));

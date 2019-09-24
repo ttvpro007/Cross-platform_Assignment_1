@@ -4,6 +4,7 @@ using RPG.Stats;
 using RPG.Core;
 using GameDevTV.Utils;
 using UnityEngine.Events;
+using System;
 
 namespace RPG.Attributes
 {
@@ -65,7 +66,7 @@ namespace RPG.Attributes
 
         public bool IsDead()
         {
-            return isDead;
+            return isDead == true;
         }
 
         public void TakeDamage(GameObject instigator, float damage)

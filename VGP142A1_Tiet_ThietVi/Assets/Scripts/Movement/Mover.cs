@@ -3,6 +3,7 @@ using UnityEngine.AI;
 using RPG.Core;
 using RPG.Saving;
 using RPG.Attributes;
+using System;
 
 namespace RPG.Movement
 {
@@ -70,6 +71,7 @@ namespace RPG.Movement
             navMeshAgent.destination = destination;
             navMeshAgent.speed = maxSpeed * Mathf.Clamp01(speedFraction);
             navMeshAgent.isStopped = false;
+            DrawDebugLine(destination);
         }
 
         public void Cancel()
@@ -95,6 +97,11 @@ namespace RPG.Movement
             }
 
             return total;
+        }
+
+        private void DrawDebugLine(Vector3 target)
+        {
+            Debug.DrawLine(transform.position, target);
         }
 
         public object CaptureState()

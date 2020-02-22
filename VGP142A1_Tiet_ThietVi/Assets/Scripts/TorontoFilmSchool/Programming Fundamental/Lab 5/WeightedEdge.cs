@@ -1,14 +1,14 @@
-﻿public class WeightedEdge<Data>
+﻿public class WeightedEdge<T>
 {
-    Node<Data> m_home;
-    Node<Data> m_neighbor;
+    Node<T> m_home;
+    Node<T> m_neighbor;
     float m_weight;
 
     public float weight { get { return m_weight; } }
-    public Node<Data> home { get { return m_home; } }
-    public Node<Data> neighbor { get { return m_neighbor; } }
+    public Node<T> home { get { return m_home; } }
+    public Node<T> neighbor { get { return m_neighbor; } }
 
-    public void RegisterProperties(Node<Data> home, Node<Data> neighbor, float weight)
+    public void RegisterProperties(Node<T> home, Node<T> neighbor, float weight)
     {
         m_home = home;
         m_neighbor = neighbor;

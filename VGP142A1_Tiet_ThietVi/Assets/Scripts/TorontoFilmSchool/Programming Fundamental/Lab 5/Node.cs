@@ -1,19 +1,19 @@
 ﻿using System.Collections.Generic;
 
-public class Node<Data>
+public class Node<T>
 {
-    Data m_data;
-    List<Node<Data>> m_neighbors = new List<Node<Data>>();
-    List<WeightedEdge<Data>> m_edges = new List<WeightedEdge<Data>>();
+    T m_data;
+    List<Node<T>> m_neighbors = new List<Node<T>>();
+    List<WeightedEdge<T>> m_edges = new List<WeightedEdge<T>>();
     bool m_visited = false;
 
-    public Node(Data data) { m_data = data; }
-    public Data data { get { return m_data; } }
-    public List<Node<Data>> neighbors { get { return m_neighbors; } }
-    public List<WeightedEdge<Data>> edges { get { return m_edges; } }
+    public Node(T data) { m_data = data; }
+    public T data { get { return m_data; } }
+    public List<Node<T>> neighbors { get { return m_neighbors; } }
+    public List<WeightedEdge<T>> edges { get { return m_edges; } }
     public bool visited { get { return m_visited; } set { m_visited = value; } }
 
-    public void AddEdge(WeightedEdge<Data> edge)
+    public void AddEdge(WeightedEdge<T> edge)
     {
         m_edges.Add(edge);
     }

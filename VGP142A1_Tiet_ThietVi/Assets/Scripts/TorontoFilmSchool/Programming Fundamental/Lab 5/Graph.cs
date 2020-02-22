@@ -1,27 +1,27 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Graph<Data>
+public class Graph<T>
 {
-    List<Node<Data>> m_nodes = new List<Node<Data>>();
-    List<WeightedEdge<Data>> m_edges = new List<WeightedEdge<Data>>();
+    List<Node<T>> m_nodes = new List<Node<T>>();
+    List<WeightedEdge<T>> m_edges = new List<WeightedEdge<T>>();
 
-    public List<Node<Data>> nodes { get { return m_nodes; } }
+    public List<Node<T>> nodes { get { return m_nodes; } }
 
-    public List<WeightedEdge<Data>> edges { get { return m_edges; } }
+    public List<WeightedEdge<T>> edges { get { return m_edges; } }
 
     public int nodeCount { get { return m_nodes.Count; } }
 
     public int edgeCount { get { return m_edges.Count; } }
 
-    public Node<Data> AddNode(Data data)
+    public Node<T> AddNode(T data)
     {
-        Node<Data> node = new Node<Data>(data);
+        Node<T> node = new Node<T>(data);
         m_nodes.Add(node);
         return node;
     }
 
-    public Node<Data> FindNode(Data data)
+    public Node<T> FindNode(T data)
     {
         for (int i = 0; i < nodes.Count; i++)
         {
@@ -34,7 +34,7 @@ public class Graph<Data>
         return null;
     }
 
-    public void AddEdge(Node<Data> node1, Node<Data> node2)
+    public void AddEdge(Node<T> node1, Node<T> node2)
     {
         if (node1 == null || node2 == null)
         {
@@ -45,9 +45,9 @@ public class Graph<Data>
         node2.neighbors.Add(node1);
     }
 
-    public void AddEdge(Node<Data> home, Node<Data> neighbor, float weight)
+    public void AddEdge(Node<T> home, Node<T> neighbor, float weight)
     {
-        WeightedEdge<Data> edge = new WeightedEdge<Data>();
+        WeightedEdge<T> edge = new WeightedEdge<T>();
 
         if (home == null || neighbor == null)
         {
@@ -63,19 +63,19 @@ public class Graph<Data>
         m_edges.Add(edge);
     }
 
-    public void AddEdge(Data data1, Data data2)
+    public void AddEdge(T data1, T data2)
     {
-        WeightedEdge<Data> edge = new WeightedEdge<Data>();
+        WeightedEdge<T> edge = new WeightedEdge<T>();
         AddEdge(FindNode(data1), FindNode(data2));
         edge.RegisterProperties(FindNode(data1), FindNode(data2), 0.0f);
         m_edges.Add(edge);
     }
 
-    public void AddEdge(Data homeData, Data neighborData, float weight)
+    public void AddEdge(T homeData, T neighborData, float weight)
     {
-        Node<Data> home = FindNode(homeData);
-        Node<Data> neighbor = FindNode(neighborData);
-        WeightedEdge<Data> edge = new WeightedEdge<Data>();
+        Node<T> home = FindNode(homeData);
+        Node<T> neighbor = FindNode(neighborData);
+        WeightedEdge<T> edge = new WeightedEdge<T>();
 
         AddEdge(home, neighbor);
         home.AddEdge(edge);
@@ -84,14 +84,14 @@ public class Graph<Data>
         edges.Add(edge);
     }
 
-    public float GetWeight(Data homeData, Data neighborData)
+    public float GetWeight(T homeData, T neighborData)
     {
         if (homeData != null && neighborData != null)
         {
-            Node<Data> home = FindNode(homeData);
-            Node<Data> neighbor = FindNode(neighborData);
+            Node<T> home = FindNode(homeData);
+            Node<T> neighbor = FindNode(neighborData);
 
-            foreach (WeightedEdge<Data> edge in home.edges)
+            foreach (WeightedEdge<T> edge in home.edges)
             {
                 if (edge.neighbor == neighbor)
                 {
@@ -109,11 +109,11 @@ public class Graph<Data>
         return 0.0f;
     }
 
-    public float GetWeight(Node<Data> home, Node<Data> neighbor)
+    public float GetWeight(Node<T> home, Node<T> neighbor)
     {
         if (home != null && neighbor != null)
         {
-            foreach (WeightedEdge<Data> edge in home.edges)
+            foreach (WeightedEdge<T> edge in home.edges)
             {
                 if (edge.neighbor == neighbor)
                 {
